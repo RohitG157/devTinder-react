@@ -1,8 +1,29 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
+import { API_ENDPOINTS, API_METHODS, BASE_URL, DEFAULT_PHOTO } from "../utils/constant";
+import { removeUser } from "../utils/slices/userSlice";
+import { removeFeed } from "../utils/slices/feedSlice";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const logOut = async () => {
+    try {
+      await fetch(BASE_URL + API_ENDPOINTS.LOGOUT, {
+        method: API_METHODS.POST,
+        credentials: "include",
+      });
+      dispatch(removeUser());
+      dispatch(removeFeed());
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleLogOut = () => {
+    logOut();
+  };
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
@@ -11,8 +32,8 @@ const NavBar = () => {
         </Link>
       </div>
       {user && (
-        <div className="flex gap-2">
-          <p>Welcome, {user.firstName}</p>
+        <div className="flex gap-2 items-center">
+          <p className="capitalize">Welcome, {user.firstName}</p>
           <div className="dropdown dropdown-end mx-5">
             <div
               tabIndex={0}
@@ -22,7 +43,7 @@ const NavBar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={user.photoUrl || DEFAULT_PHOTO}
                 />
               </div>
             </div>
@@ -33,14 +54,13 @@ const NavBar = () => {
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </li>
               <li>
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <p onClick={handleLogOut}>Logout</p>
               </li>
             </ul>
           </div>

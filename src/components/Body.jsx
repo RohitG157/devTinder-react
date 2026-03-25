@@ -3,15 +3,8 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import ErrorBanner from "./common/ErrorBanner";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  API_ENDPOINTS,
-  API_METHODS,
-  BASE_URL,
-  MESSAGE,
-  MESSAGE_TYPE,
-} from "../utils/constant";
+import { API_ENDPOINTS, API_METHODS, BASE_URL } from "../utils/constant";
 import { addUser } from "../utils/slices/userSlice";
-import { addBanner } from "../utils/slices/bannerSlice";
 import { useEffect } from "react";
 
 const Body = () => {
@@ -25,14 +18,9 @@ const Body = () => {
         credentials: "include",
       });
       const json = await res.json();
-      dispatch(addUser(json.data));
+      dispatch(addUser(json));
     } catch (error) {
-      dispatch(
-        addBanner({
-          message: MESSAGE.GENERIC,
-          messageType: MESSAGE_TYPE.ERROR,
-        }),
-      );
+      console.log(error);
     }
   };
   useEffect(() => {
