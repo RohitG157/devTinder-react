@@ -2,6 +2,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/slices/userSlice";
 import { useNavigate } from "react-router";
+import {
+  API_ENDPOINTS,
+  API_METHODS,
+  BASE_URL,
+  MESSAGE_TYPE,
+} from "../utils/constant";
+import { addBanner, hideBanner } from "../utils/slices/bannerSlice";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
@@ -10,8 +17,8 @@ const Login = () => {
   const navigate = useNavigate();
   const signIn = async () => {
     try {
-      const result = await fetch("http://localhost:5000/login", {
-        method: "POST",
+      const result = await fetch(BASE_URL + API_ENDPOINTS.LOGIN, {
+        method: API_METHODS.POST,
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -26,10 +33,18 @@ const Login = () => {
       dispatch(addUser(json.data));
       navigate("/");
     } catch (error) {
+      dispatch(
+        addBanner({
+          message: "Please try again later.",
+          messageType: MESSAGE_TYPE.ERROR,
+        }),
+      );
+      console.log(error);
       console.error(error);
     }
   };
   const handleSignIn = () => {
+    dispatch(hideBanner());
     signIn();
   };
   return (

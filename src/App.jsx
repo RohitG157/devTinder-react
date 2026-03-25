@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import store from "./utils/store";
 import Feed from "./components/Feed";
 import AuthLayout from "./components/layouts/AuthLayout";
+import PublicRoutes from "./components/layouts/PublicRoutes";
 
 function App() {
   return (
@@ -14,8 +15,11 @@ function App() {
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Body />}>
-              <Route path="/login" element={<Login />} />
-              {/*** Used As an middleware */}
+              {/*** Used As an guest middleware */}
+              <Route element={<PublicRoutes />}>
+                <Route path="/login" element={<Login />} />
+              </Route>
+              {/*** Used As an auth middleware */}
               <Route element={<AuthLayout />}>
                 <Route path="/" element={<Feed />} />
                 <Route path="/profile" element={<Profile />} />
