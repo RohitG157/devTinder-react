@@ -7,6 +7,8 @@ import store from "./utils/store";
 import Feed from "./components/Feed";
 import AuthLayout from "./components/layouts/AuthLayout";
 import PublicRoutes from "./components/layouts/PublicRoutes";
+import Connections from "./components/Connections";
+import Requests from "./components/Requests";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
               <Route element={<AuthLayout />}>
                 <Route path="/" element={<Feed />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/connections" element={<Connections />} />
+                <Route path="/requests" element={<Requests />} />
               </Route>
             </Route>
           </Routes>

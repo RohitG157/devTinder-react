@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
-import { API_ENDPOINTS, API_METHODS, BASE_URL, DEFAULT_PHOTO } from "../utils/constant";
+import {
+  API_ENDPOINTS,
+  API_METHODS,
+  BASE_URL,
+  DEFAULT_PHOTO,
+} from "../utils/constant";
 import { removeUser } from "../utils/slices/userSlice";
 import { removeFeed } from "../utils/slices/feedSlice";
 
@@ -57,7 +62,10 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections">Connections</Link>
+              </li>
+							<li>
+                <Link to="/requests">Requests</Link>
               </li>
               <li>
                 <p onClick={handleLogOut}>Logout</p>

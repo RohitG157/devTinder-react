@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
   REGISTER: "/signup",
   FEED: "/feed",
   UPDATE_PROFILE: "/profile/edit",
+  CONNECTIONS: "/user/connections",
 };
 export const API_METHODS = {
   GET: "GET",
