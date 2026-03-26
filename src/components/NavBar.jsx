@@ -38,7 +38,7 @@ const NavBar = () => {
       </div>
       {user && (
         <div className="flex gap-2 items-center">
-          <p className="capitalize">Welcome, {user.firstName}</p>
+          <p className="capitalize text-gray-500 font-semibold">Welcome, {user.firstName}</p>
           <div className="dropdown dropdown-end mx-5">
             <div
               tabIndex={0}

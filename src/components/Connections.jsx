@@ -10,7 +10,32 @@ import { addConnections } from "../utils/slices/connectionSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
-  const connections = useSelector((store) => store.connections);
+  const connections = [
+    {
+      _id: "69c3ef28dc3ffc8d4413566b",
+      firstName: "sneha",
+      lastName: "sharma",
+      photoUrl:
+        "https://thumbs.dreamstime.com/b/fashionable-female-dummy-1424069.jpg",
+      about:
+        "Sneha Sharma is an Indian racing driver who competes in Formula 4 National Racing Championship, she is also professionally a Pilot with Vistara Airlines.",
+      skills: ["JavaScript", "TypeScript", "React", "Angular"],
+      age: 29,
+      gender: "female",
+    },
+    {
+      _id: "69c3f049dc3ffc8d4413566f",
+      firstName: "Rohit",
+      lastName: "Goyal",
+      photoUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mark_Zuckerberg_in_September_2025_%28cropped%29.jpg/250px-Mark_Zuckerberg_in_September_2025_%28cropped%29.jpg",
+      about:
+        "Rohit Goyal is an American businessman and programmer who co-founded the social media service Facebook and its parent company Meta Platforms. He serves as its chairman, chief executive officer, and controlling shareholder",
+      skills: [],
+      age: 30,
+      gender: "male",
+    },
+  ]; //useSelector((store) => store.connections);
   const fetchConnections = async () => {
     const res = await fetch(BASE_URL + API_ENDPOINTS.CONNECTIONS, {
       method: API_METHODS.GET,
@@ -25,11 +50,15 @@ const Connections = () => {
 
   if (!connections) return;
   return (
-    <div className="mt-5">
-      {(connections.length === 0) && <p className="text-center mt-5 font-bold text-gray-600">No Connection Found</p>}
-      {(connections.length > 0) && (
-        <ul className="list bg-base-100 rounded-box shadow-md">
-          <li className="px-4 text-xs opacity-60 tracking-wide font-bold">
+    <div className="m-5 border border-gray-300 rounded-lg">
+      {connections.length === 0 && (
+        <p className="text-center mt-5 font-bold text-gray-600">
+          No Connection Found
+        </p>
+      )}
+      {connections.length > 0 && (
+        <ul className="list bg-base-100 rounded-box shadow-md p-5">
+          <li className="px-4 text-lg opacity-60 tracking-wide font-bold">
             Connections
           </li>
 
@@ -53,14 +82,14 @@ const Connections = () => {
                 </div>
                 <p className="text-xs">{connection.about}</p>
               </div>
-              <div className="col-span-3 text-center">
+              {/* <div className="col-span-3 text-center">
                 <button className="btn btn-square btn-ghost mx-4 px-8 py-2 text-error">
                   Reject
                 </button>
                 <button className="btn btn-square btn-ghost mx-4 px-8 py-2 text-success">
                   Accept
                 </button>
-              </div>
+              </div> */}
             </li>
           ))}
         </ul>

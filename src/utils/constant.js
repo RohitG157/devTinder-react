@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
   FEED: "/feed",
   UPDATE_PROFILE: "/profile/edit",
   CONNECTIONS: "/user/connections",
+  REVIEW_REQ: (status, _id) => `/request/review/${status}/${_id}`,
 };
 export const API_METHODS = {
   GET: "GET",
@@ -32,5 +33,9 @@ export const STATIC_TEXT = {
   REGISTER_CTA: "Create an account",
 };
 
+export const STATUS = {
+  REJECTED: "rejected",
+  ACCEPTED: "accepted",
+};
 export const DEFAULT_PHOTO =
   "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp";
