@@ -1,4 +1,24 @@
+import { useDispatch } from "react-redux";
+import { api } from "../utils/api";
+import { API_ENDPOINTS, BASE_URL, STATUS } from "../utils/constant";
+import { removeFeed } from "../utils/slices/feedSlice";
+
 const UserCard = ({ user }) => {
+  const dispatch = useDispatch();
+  const reviewConnection = async (status, _id) => {
+    try {
+      const res = await api.post(
+        BASE_URL + API_ENDPOINTS.REVIEW_CONNECTION(status, _id),
+      );
+
+      const json = res.json();
+      dispatch(removeFeed(_id));
+    } catch (error) {}
+  };
+  const handleReviewConnections = (status, _id) => {
+    reviewConnection(status, _id);
+  };
+  if (!user) return <p>Feed is empty. </p>;
   return (
     <div className="card bg-base-100 w-96 shadow-sm">
       <figure>
@@ -22,8 +42,18 @@ const UserCard = ({ user }) => {
 
         <p className="text-gray-600">{user.about}</p>
         <div className="card-actions justify-end mt-4">
-          <button className="btn btn-ghost">Ignore</button>
-          <button className="btn btn-primary">Interested</button>
+          <button
+            className="btn btn-ghost"
+            onClick={() => handleReviewConnections(STATUS.IGNORED, user._id)}
+          >
+            Ignore
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleReviewConnections(STATUS.INTERESTED, user._id)}
+          >
+            Interested
+          </button>
         </div>
       </div>
     </div>

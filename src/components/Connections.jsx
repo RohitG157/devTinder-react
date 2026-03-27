@@ -10,32 +10,7 @@ import { addConnections } from "../utils/slices/connectionSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
-  const connections = [
-    {
-      _id: "69c3ef28dc3ffc8d4413566b",
-      firstName: "sneha",
-      lastName: "sharma",
-      photoUrl:
-        "https://thumbs.dreamstime.com/b/fashionable-female-dummy-1424069.jpg",
-      about:
-        "Sneha Sharma is an Indian racing driver who competes in Formula 4 National Racing Championship, she is also professionally a Pilot with Vistara Airlines.",
-      skills: ["JavaScript", "TypeScript", "React", "Angular"],
-      age: 29,
-      gender: "female",
-    },
-    {
-      _id: "69c3f049dc3ffc8d4413566f",
-      firstName: "Rohit",
-      lastName: "Goyal",
-      photoUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mark_Zuckerberg_in_September_2025_%28cropped%29.jpg/250px-Mark_Zuckerberg_in_September_2025_%28cropped%29.jpg",
-      about:
-        "Rohit Goyal is an American businessman and programmer who co-founded the social media service Facebook and its parent company Meta Platforms. He serves as its chairman, chief executive officer, and controlling shareholder",
-      skills: [],
-      age: 30,
-      gender: "male",
-    },
-  ]; //useSelector((store) => store.connections);
+  const connections = useSelector((store) => store.connections);
   const fetchConnections = async () => {
     const res = await fetch(BASE_URL + API_ENDPOINTS.CONNECTIONS, {
       method: API_METHODS.GET,

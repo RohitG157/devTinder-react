@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
   UPDATE_PROFILE: "/profile/edit",
   CONNECTIONS: "/user/connections",
   REVIEW_REQ: (status, _id) => `/request/review/${status}/${_id}`,
+  REVIEW_CONNECTION: (status, _id) => `/request/send/${status}/${_id}`,
 };
 export const API_METHODS = {
   GET: "GET",
@@ -36,6 +37,8 @@ export const STATIC_TEXT = {
 export const STATUS = {
   REJECTED: "rejected",
   ACCEPTED: "accepted",
+  INTERESTED: "interested",
+  IGNORED: "ignored",
 };
 export const DEFAULT_PHOTO =
   "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp";
